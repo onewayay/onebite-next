@@ -46,11 +46,12 @@ async function BookDetail({ bookId }: { bookId: string }) {
 
 async function ReviewList({ bookId }: { bookId: string }) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`,
+    { next: { tags: [`reveiw-${bookId}`] } }
   );
 
   if (!response.ok) {
-    throw new Error(`Reveiw fetch failed : ${response.statusText}`);
+    throw new Error(`Review fetch failed : ${response.statusText}`);
   }
 
   const reveiws: ReviewData[] = await response.json();
